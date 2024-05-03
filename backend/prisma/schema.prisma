@@ -14,7 +14,7 @@ datasource db {
 }
 
 model User{
-id String @id @default(uuid())
+id Int @id @default(autoincrement())
 email String @unique
 name String?
 password String
@@ -27,5 +27,5 @@ model Post{
   content String
   published Boolean @default(false)
   author User @relation(fields: [authorId],references: [id])
-  authorId String
+  authorId Int
 }
