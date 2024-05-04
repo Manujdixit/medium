@@ -15,17 +15,17 @@ datasource db {
 
 model User{
 id Int @id @default(autoincrement())
-email String @unique
+username String @unique
 name String?
 password String
-posts Post[]
+blogs Blog[]
 }
 
-model Post{
-  id String @id @default(uuid())
+model Blog{
+  id Int @id @default(autoincrement())
+  authorId Int
   title String
   content String
   published Boolean @default(false)
   author User @relation(fields: [authorId],references: [id])
-  authorId Int
 }

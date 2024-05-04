@@ -2,6 +2,7 @@ import { Hono } from "hono";
 import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
 import { verify } from "hono/jwt";
+import { createBlogInput, updateBlogInput } from "@100xdevs/medium-common";
 
 export const blogRouter = new Hono<{
   Bindings: {
@@ -96,7 +97,7 @@ blogRouter.put("/update/:id", async (c) => {
       return c.json({ message: "You are not authorized to update this post." });
     }
 
-    const updatedBlog = await prisma.post.update({
+    const updatedBlog = await prisma.blog.update({
       where: { id: postId },
       data: {
         title: body.title,
@@ -119,7 +120,7 @@ blogRouter.get("/bulk", async (c) => {
   }).$extends(withAccelerate());
 
   try {
-    const blogs = await prisma.post.findMany({
+    const blogs = await prisma.blog.findMany({
       select: {
         id: true,
         content: true,
@@ -145,9 +146,9 @@ blogRouter.get("/:id", async (c) => {
   }).$extends(withAccelerate());
 
   try {
-    const blog = await prisma.post.findFirst({
+    const blog = await prisma.blog.findFirst({
       where: {
-        id: id,
+        id: Number(id),
       },
       //   data: {
       //     title: body.title,
