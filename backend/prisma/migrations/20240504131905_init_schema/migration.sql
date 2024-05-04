@@ -1,8 +1,8 @@
 -- CreateTable
 CREATE TABLE "User" (
     "id" SERIAL NOT NULL,
-    "username" TEXT NOT NULL,
     "name" TEXT,
+    "username" TEXT NOT NULL,
     "password" TEXT NOT NULL,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
@@ -12,8 +12,8 @@ CREATE TABLE "User" (
 CREATE TABLE "Blog" (
     "id" SERIAL NOT NULL,
     "authorId" INTEGER NOT NULL,
-    "title" TEXT NOT NULL,
     "content" TEXT NOT NULL,
+    "title" TEXT NOT NULL,
     "published" BOOLEAN NOT NULL DEFAULT false,
 
     CONSTRAINT "Blog_pkey" PRIMARY KEY ("id")
